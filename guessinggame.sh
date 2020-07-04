@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/bin/bash
 
 function calculate {
 	real_num=$(find . -maxdepth 1 -type f | wc -l)
@@ -12,17 +12,22 @@ while [[ $guess -eq 0 ]]
 do
 	echo "Guess the number of files.."
 	read n
-	if [[ $n =~ ^[0-9] ]]
+	if [[ $n =~ ^[1-9]$ ]]
 	then
-		if [[ $repo -eq $n ]]
+		if [[ $(echo "${#n}") -gt 3 ]]
 		then
-			echo "Congratulations! You made the perfect guess."
-			let guess=1
-		elif [[ $repo -gt $n ]]
-		then
-			echo "Too low"
+			echo "Input number out of range"
 		else
-			echo "Too high"
+			if [[ $repo -eq $n ]]
+			then
+				echo "Congratulations! You made the perfect guess."
+				let guess=1
+			elif [[ $repo -gt $n ]]
+			then
+				echo "Too low"
+			else
+				echo "Too high"
+			fi
 		fi
 	else
 		echo "Enter a valid number"
