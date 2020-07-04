@@ -1,7 +1,7 @@
 #!usr/bin/env bash
 
 function calculate {
-	real_num=$(ls | wc -l)
+	real_num=$(find . -maxdepth 1 -type f | wc -l)
 	echo "$real_num"
 }
 
@@ -12,7 +12,7 @@ while [[ $guess -eq 0 ]]
 do
 	echo "Guess the number of files.."
 	read n
-	if [[ $n =~ [0-9] ]]
+	if [[ $n =~ ^[0-9] ]]
 	then
 		if [[ $repo -eq $n ]]
 		then
